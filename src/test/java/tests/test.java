@@ -10,15 +10,21 @@ import static org.hamcrest.CoreMatchers.*;
 
 class PostTest {
 
+    private static final String BASE_URL = "https://reqres.in";
+    private static final String BASE_PATH = "/api/users";
+
     @BeforeAll
     static void urlInfo() {
-        baseURI = "https://reqres.in";
-        basePath = "/api/users";
+        baseURI = BASE_URL;
+        basePath = BASE_PATH;
     }
 
     @Test
     void successTest() {
-        String payload = "{ \"name\": \"morpheus\", \"job\": \"leader\" }";
+        String name = "morpheus";
+        String  job = "leader";
+
+        String payload = "{ \"name\": \"" + name + "\", \"job\": \"" + job + "\" }";
 
         given().
             contentType("application/json").
@@ -50,11 +56,14 @@ class PostTest {
 
     @Test
     void bigNameSuccessTest() {
-        String payload = "{ \"name\": \"morpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheus" +
-                "morpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheus" +
-                "morpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheus" +
-                "morpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheusmorpheus" +
-                "\", \"job\": \"leader\" }";
+        String name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut" +
+                " labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+                "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " +
+                "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in " +
+                "culpa qui officia deserunt mollit anim id est laborum.";
+        String  job = "leader";
+
+        String payload = "{ \"name\": \"" + name + "\", \"job\": \"" + job + "\" }";
 
         given().
                 contentType("application/json").
@@ -69,10 +78,14 @@ class PostTest {
 
     @Test
     void bigJobSuccessTest() {
-        String payload = "{ \"name\": \"morpheus\", \"job\": \"leaderleaderleaderleaderleaderleaderleaderleaderleader" +
-                "leaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleader" +
-                "leaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleader" +
-                "leaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleaderleader\" }";
+        String  name = "Arthur";
+        String job = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut" +
+                " labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris " +
+                "nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " +
+                "esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in " +
+                "culpa qui officia deserunt mollit anim id est laborum.";
+
+        String payload = "{ \"name\": \"" + name + "\", \"job\": \"" + job + "\" }";
 
         given().
                 contentType("application/json").
@@ -91,7 +104,7 @@ class PostTest {
         String  job = "leader";
 
         String payload = "{ \"name\": " + name + ", \"job\": \"" + job + "\" }";
-        System.out.println(payload);
+
         given().
                 contentType("application/json").
                 body(payload).
@@ -111,7 +124,7 @@ class PostTest {
         int  job = 2;
 
         String payload = "{ \"name\": \"" + name + "\", \"job\": " + job + " }";
-        System.out.println(payload);
+
         given().
                 contentType("application/json").
                 body(payload).
